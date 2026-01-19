@@ -1,0 +1,27 @@
+name: po_vision
+
+services:
+  po_vision:
+    image: wjcl3gj94/toolkitpv:${IMAGE_TAG}
+    restart: always
+
+    networks:
+      - ai
+
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+networks:
+  ai:
+    external: true

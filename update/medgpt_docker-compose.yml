@@ -1,0 +1,24 @@
+name: medgpt
+
+services:
+  medgpt:
+    image: wjcl3gj94/toolkitmg:${IMAGE_TAG}
+    restart: always
+
+    networks:
+      - ai
+
+    volumes:
+      - C:\hongsen_ai\medgpt\logs:/app/logs
+      - C:\hongsen_ai\medgpt\error_rx:/app/error_rx
+      - C:\hongsen_ai\medgpt\rule_url.txt:/app/rule_url.txt:ro
+
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+networks:
+  ai:
+    external: true
